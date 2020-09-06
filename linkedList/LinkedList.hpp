@@ -29,10 +29,18 @@ bool LinkedList<T>::isEmpty() const
 template <typename T>
 int LinkedList<T>::size() const
 {
+	Node<T>* temp = m_front;
 	/** TODO 
 		Fix this method
 	*/
-	return(0);
+	int count = 0; // Initialize count  
+	Node<T>* temp = m_front; // Initialize current  
+	while (temp != NULL)
+	{
+		count++;
+		temp = temp->getNext();
+	}
+	return count;
 }
 
 template <typename T>
@@ -46,10 +54,10 @@ bool LinkedList<T>::search(T value) const
 	*/
 	while ((!isFound) && (m_front != NULL)) //runs through list until data is found within a node or end of list is reached
 	{
-		if (m_front->data == value) //if the node's data equals the key then the node has been found
+		if (temp->data == value) //if the node's data equals the key then the node has been found
 			isFound = true;
 		else
-			m_front = m_front->getNext(); //moves to next node in list
+			temp = temp->getNext(); //moves to next node in list
 	}
 
 	return(isFound);
