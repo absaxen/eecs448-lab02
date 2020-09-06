@@ -29,7 +29,7 @@ bool LinkedList<T>::isEmpty() const
 template <typename T>
 int LinkedList<T>::size() const
 {
-	Node<T>* temp = m_front;
+	
 	/** TODO 
 		Fix this method
 	*/
@@ -54,7 +54,7 @@ bool LinkedList<T>::search(T value) const
 	*/
 	while ((!isFound) && (m_front != NULL)) //runs through list until data is found within a node or end of list is reached
 	{
-		if (temp->data == value) //if the node's data equals the key then the node has been found
+		if (temp->getValue() == value) //if the node's data equals the key then the node has been found
 			isFound = true;
 		else
 			temp = temp->getNext(); //moves to next node in list
@@ -131,13 +131,13 @@ bool LinkedList<T>::removeBack()
 		isRemoved = true;
 	}
 	secondintoLast = m_front;
-	while (secondintolast->getNext()->getNext() != nullptr)
+	while (secondintoLast->getNext()->getNext() != nullptr)
 	{
 		secondintoLast = secondintoLast->getNext();
 	}
 
 	delete (secondintoLast->getNext());
-	secondintoLast->getNext() = nullptr;
+	secondintoLast->setNext(nullptr);
 	isRemoved = true;
 	return(isRemoved);
 }	
