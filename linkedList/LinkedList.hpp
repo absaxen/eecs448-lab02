@@ -44,6 +44,13 @@ bool LinkedList<T>::search(T value) const
 	/** TODO 
 		Fix this method
 	*/
+	while ((!isFound) && (m_front != NULL)) //runs through list until data is found within a node or end of list is reached
+	{
+		if (m_front->data == value) //if the node's data equals the key then the node has been found
+			isFound = true;
+		else
+			m_front = m_front->getNext(); //moves to next node in list
+	}
 
 	return(isFound);
 }
