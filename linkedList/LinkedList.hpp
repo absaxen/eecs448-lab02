@@ -29,38 +29,26 @@ bool LinkedList<T>::isEmpty() const
 template <typename T>
 int LinkedList<T>::size() const
 {
-	
-	/** TODO 
-		Fix this method
-	*/
-	int count = 0; // Initialize count  
-	Node<T>* temp = m_front; // Initialize current  
-	while (temp != NULL)
-	{
-		count++;
-		temp = temp->getNext();
-	}
-	return count;
+	return(m_size);
 }
 
 template <typename T>
 bool LinkedList<T>::search(T value) const
 {
-	Node<T>* temp = m_front;
-	bool isFound = false;
-
-	/** TODO 
-		Fix this method
-	*/
-	while ((!isFound) && (m_front != NULL)) //runs through list until data is found within a node or end of list is reached
+Node<T>* temp = m_front;
+	if (temp == nullptr)
 	{
-		if (temp->getValue() == value) //if the node's data equals the key then the node has been found
-			isFound = true;
-		else
-			temp = temp->getNext(); //moves to next node in list
+		return false;
 	}
-
-	return(isFound);
+	while(temp->getValue() != value)
+	{
+		temp = temp->getNext();
+		if (temp == nullptr)
+		{
+			return false;
+		} 
+	}
+	return(true);
 }
 
 template <typename T>
@@ -114,31 +102,30 @@ void LinkedList<T>::addFront(T value)
 template <typename T>
 bool LinkedList<T>::removeBack()
 {
+	Node<T>* lastNode = nullptr;
 	Node<T>* secondintoLast = nullptr;
-	Node<T>* temp = m_front;
 	bool isRemoved = false;
 
-	/** TODO 
-		Fix this method
-	*/
-	if (temp == nullptr)
+	if(isEmpty())
 	{
-		std::cout << "List is empty!";
+		return false;	
 	}
-	if (temp->getNext() == nullptr)
+	if(size() == 1)
 	{
-		delete temp;
-		isRemoved = true;
+		delete m_front;
 	}
-	secondintoLast = m_front;
-	while (secondintoLast->getNext()->getNext() != nullptr)
-	{
-		secondintoLast = secondintoLast->getNext();
+	else
+	{	Node<T>* temp = m_front;
+		while (temp->getNext()->getNext() != nullptr)
+		{
+			temp = temp->getNext();
+		}
+		delete temp->getNext();
+		temp->setNext(nullptr);
+		m_size--;
+		return true;
 	}
 
-	delete (secondintoLast->getNext());
-	secondintoLast->setNext(nullptr);
-	isRemoved = true;
 	return(isRemoved);
 }	
 
